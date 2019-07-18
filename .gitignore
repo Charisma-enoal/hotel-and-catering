@@ -1,11 +1,31 @@
-.idea/codeStyles/*
-.idea/workspace.xml
-.idea/misc.xml
-.idea/libraries
-logs/
-.idea/deployment.xml
-.idea/webServers.xml
-*.class
-logs/*.log
-*/target/*
-.mvn/*
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+### VS Code ###
+.vscode/
