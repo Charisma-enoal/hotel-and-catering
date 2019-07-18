@@ -1,0 +1,10 @@
+.idea/codeStyles/*
+.idea/workspace.xml
+.idea/misc.xml
+.idea/libraries
+logs/
+.idea/deployment.xml
+.idea/webServers.xml
+*.class
+logs/*.log
+*/target/*
