@@ -18,6 +18,7 @@
 
     <modules>
         <module>hc-common</module>
+        <module>hc-config</module>
     </modules>
 
     <!-- 版本控制 -->
