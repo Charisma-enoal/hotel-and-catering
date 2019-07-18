@@ -8,3 +8,4 @@ logs/
 *.class
 logs/*.log
 */target/*
+.mvn/*
