@@ -15,10 +15,13 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>hotel-and-catering-root</name>
     <description>hotel and catering business</description>
+    <packaging>pom</packaging>
 
     <modules>
         <module>hc-common</module>
         <module>hc-config</module>
+        <module>hc-center</module>
+        <module>hc-sys</module>
     </modules>
 
     <!-- 版本控制 -->

@@ -1,0 +1,13 @@
+server:
+  port: 18000
+spring:
+  application:
+    name: hc-center
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: htt://${eureka.instance.hostname}:${server.port}/eureka/

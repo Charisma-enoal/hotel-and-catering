@@ -1,17 +1,17 @@
-package com.murphy.gee.config;
+package com.murphy.gee.sys;
 
+import com.codingapi.txlcn.tc.config.EnableDistributedTransaction;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.config.server.EnableConfigServer;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 @SpringBootApplication
-@EnableConfigServer
 @EnableEurekaClient
-public class HotelAndCateringConfigApplication {
+@EnableDistributedTransaction
+public class HotelAndCateringSysApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(HotelAndCateringConfigApplication.class, args);
+        SpringApplication.run(HotelAndCateringSysApplication.class, args);
     }
 
 }
