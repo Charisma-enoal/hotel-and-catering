@@ -1,0 +1,25 @@
+server:
+  port: 18200
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:18000/eureka/
+spring:
+  redis:
+    host: 127.0.0.1
+    database: 0
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 20
+#      jdbc-url: jdbc:mysql://localhost:3306/murphy?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
+    url: jdbc:mysql://localhost:3306/murphy?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
+    username: root
+    password: 666666
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  application:
+    name: hc-auth
