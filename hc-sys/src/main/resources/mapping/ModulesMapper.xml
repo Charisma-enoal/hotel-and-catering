@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.murphy.gee.sys.mapper.ModulesMapper">
+  <resultMap id="BaseResultMap" type="com.murphy.gee.sys.entity.Modules">
+    <id column="modules_id" jdbcType="BIGINT" property="modulesId" />
+    <result column="modules_name" jdbcType="VARCHAR" property="modulesName" />
+    <result column="modules_remark" jdbcType="VARCHAR" property="modulesRemark" />
+    <result column="modules_order" jdbcType="INTEGER" property="modulesOrder" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="create_person" jdbcType="VARCHAR" property="createPerson" />
+    <result column="last_edit_date" jdbcType="TIMESTAMP" property="lastEditDate" />
+    <result column="last_edit_person" jdbcType="VARCHAR" property="lastEditPerson" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    modules_id, modules_name, modules_remark, modules_order, create_date, create_person, 
+    last_edit_date, last_edit_person
+  </sql>
+  <select id="selectByExample" parameterType="com.murphy.gee.sys.entity.ModulesExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_modules
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_modules
+    where modules_id = #{modulesId,jdbcType=BIGINT}
+  </select>
+  <select id="findModulesByUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
+SELECT
+	a.modules_id,
+	a.modules_name,
+	a.modules_order
+FROM
+	sys_modules a
+	LEFT JOIN sys_mapping_authority_modules b ON a.modules_id = b.modules_id
+	LEFT JOIN sys_authority c ON b.auth_id = c.auth_id
+	LEFT JOIN sys_mapping_role_authority d ON c.auth_id = d.auth_id
+	LEFT JOIN sys_role e ON d.role_id = e.role_id
+	LEFT JOIN sys_mapping_user_role f ON e.role_id = f.role_id
+	LEFT JOIN sys_user g ON f.user_id = g.user_id
+WHERE
+	g.user_name = #{userName,jdbcType=VARCHAR} AND g.user_enable = 1 AND e.role_enable = 1
+
+UNION
+
+SELECT
+	a.modules_id,
+	a.modules_name,
+	a.modules_order
+FROM
+	sys_modules a
+	LEFT JOIN sys_mapping_authority_modules b ON a.modules_id = b.modules_id
+	LEFT JOIN sys_authority c ON b.auth_id = c.auth_id
+	LEFT JOIN sys_mapping_role_authority d ON c.auth_id = d.auth_id
+	LEFT JOIN sys_role e ON d.role_id = e.role_id
+	LEFT JOIN sys_mapping_group_role f ON e.role_id = f.role_id
+	LEFT JOIN sys_user_group g ON f.group_id = g.group_id
+	LEFT JOIN sys_mapping_group_user h ON g.group_id = h.group_id
+	LEFT JOIN sys_user i ON h.user_id = i.user_id
+WHERE
+	i.user_name = #{userName,jdbcType=VARCHAR} AND i.user_enable = 1 AND e.role_enable = 1
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_modules
+    where modules_id = #{modulesId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.murphy.gee.sys.entity.ModulesExample">
+    delete from sys_modules
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.murphy.gee.sys.entity.Modules">
+    insert into sys_modules (modules_id, modules_name, modules_remark, 
+      modules_order, create_date, create_person, 
+      last_edit_date, last_edit_person)
+    values (#{modulesId,jdbcType=BIGINT}, #{modulesName,jdbcType=VARCHAR}, #{modulesRemark,jdbcType=VARCHAR}, 
+      #{modulesOrder,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{createPerson,jdbcType=VARCHAR}, 
+      #{lastEditDate,jdbcType=TIMESTAMP}, #{lastEditPerson,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.murphy.gee.sys.entity.Modules">
+    insert into sys_modules
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="modulesId != null">
+        modules_id,
+      </if>
+      <if test="modulesName != null">
+        modules_name,
+      </if>
+      <if test="modulesRemark != null">
+        modules_remark,
+      </if>
+      <if test="modulesOrder != null">
+        modules_order,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="createPerson != null">
+        create_person,
+      </if>
+      <if test="lastEditDate != null">
+        last_edit_date,
+      </if>
+      <if test="lastEditPerson != null">
+        last_edit_person,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="modulesId != null">
+        #{modulesId,jdbcType=BIGINT},
+      </if>
+      <if test="modulesName != null">
+        #{modulesName,jdbcType=VARCHAR},
+      </if>
+      <if test="modulesRemark != null">
+        #{modulesRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="modulesOrder != null">
+        #{modulesOrder,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createPerson != null">
+        #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="lastEditDate != null">
+        #{lastEditDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastEditPerson != null">
+        #{lastEditPerson,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.murphy.gee.sys.entity.ModulesExample" resultType="java.lang.Long">
+    select count(*) from sys_modules
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sys_modules
+    <set>
+      <if test="record.modulesId != null">
+        modules_id = #{record.modulesId,jdbcType=BIGINT},
+      </if>
+      <if test="record.modulesName != null">
+        modules_name = #{record.modulesName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modulesRemark != null">
+        modules_remark = #{record.modulesRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modulesOrder != null">
+        modules_order = #{record.modulesOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createPerson != null">
+        create_person = #{record.createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastEditDate != null">
+        last_edit_date = #{record.lastEditDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastEditPerson != null">
+        last_edit_person = #{record.lastEditPerson,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sys_modules
+    set modules_id = #{record.modulesId,jdbcType=BIGINT},
+      modules_name = #{record.modulesName,jdbcType=VARCHAR},
+      modules_remark = #{record.modulesRemark,jdbcType=VARCHAR},
+      modules_order = #{record.modulesOrder,jdbcType=INTEGER},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      create_person = #{record.createPerson,jdbcType=VARCHAR},
+      last_edit_date = #{record.lastEditDate,jdbcType=TIMESTAMP},
+      last_edit_person = #{record.lastEditPerson,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.murphy.gee.sys.entity.Modules">
+    update sys_modules
+    <set>
+      <if test="modulesName != null">
+        modules_name = #{modulesName,jdbcType=VARCHAR},
+      </if>
+      <if test="modulesRemark != null">
+        modules_remark = #{modulesRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="modulesOrder != null">
+        modules_order = #{modulesOrder,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createPerson != null">
+        create_person = #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="lastEditDate != null">
+        last_edit_date = #{lastEditDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastEditPerson != null">
+        last_edit_person = #{lastEditPerson,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where modules_id = #{modulesId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.murphy.gee.sys.entity.Modules">
+    update sys_modules
+    set modules_name = #{modulesName,jdbcType=VARCHAR},
+      modules_remark = #{modulesRemark,jdbcType=VARCHAR},
+      modules_order = #{modulesOrder,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      create_person = #{createPerson,jdbcType=VARCHAR},
+      last_edit_date = #{lastEditDate,jdbcType=TIMESTAMP},
+      last_edit_person = #{lastEditPerson,jdbcType=VARCHAR}
+    where modules_id = #{modulesId,jdbcType=BIGINT}
+  </update>
+</mapper>

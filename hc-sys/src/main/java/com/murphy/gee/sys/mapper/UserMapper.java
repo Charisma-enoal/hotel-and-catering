@@ -17,6 +17,8 @@ public interface UserMapper {
 
     int insert(User record);
 
+    int insertReturnKey(User user);
+
     int insertSelective(User record);
 
     List<User> selectByExample(UserExample example);
@@ -30,4 +32,19 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    List<User> findList(@Param("userEnable") Integer userEnable, @Param("keyword") String keyword);
+
+    User initUser(String userName);
+
+    int modifyStatus(User user);
+
+    /*
+     * @description: 重置密码
+     * @param userName,userPassword
+     * @return: int
+     * @author: Murphy.Gee
+     * @date: 2019-09-09 17:50
+     */
+    int refreshPassword(User user);
 }

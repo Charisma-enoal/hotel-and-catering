@@ -50,7 +50,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                         "/v2/api-docs","/css/**","/img/**","/js/**","/semantic/**")
                 .permitAll()
                 .and().authorizeRequests().antMatchers(HttpMethod.OPTIONS,"/oauth/**").permitAll()
-                .and().authorizeRequests().antMatchers("/test").permitAll()
+                .and().authorizeRequests().antMatchers("/login","/test").permitAll()
                 .anyRequest()
                 .authenticated();
     }

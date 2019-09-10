@@ -36,6 +36,9 @@
         <!-- 分布式事务-->
         <txlcn.version>5.0.2.RELEASE</txlcn.version>
         <hikari.cp.version>3.3.1</hikari.cp.version>
+        <fastjson.version>1.2.58</fastjson.version>
+        <!-- Swaggger -->
+        <swagger.version>2.9.2</swagger.version>
     </properties>
 
     <!-- 管理依赖 -->
@@ -74,6 +77,21 @@
                 <groupId>com.zaxxer</groupId>
                 <artifactId>HikariCP</artifactId>
                 <version>${hikari.cp.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

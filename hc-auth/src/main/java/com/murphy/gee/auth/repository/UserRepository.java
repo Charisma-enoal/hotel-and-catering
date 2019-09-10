@@ -1,8 +1,8 @@
 package com.murphy.gee.auth.repository;
 
-import com.murphy.gee.auth.entity.OauthUser;
+import com.murphy.gee.auth.entity.SysUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<OauthUser,Long> {
-    OauthUser findByUserName(String userName);
+public interface UserRepository extends JpaRepository<SysUser,Long> {
+    SysUser findByUserName(String userName);
 }

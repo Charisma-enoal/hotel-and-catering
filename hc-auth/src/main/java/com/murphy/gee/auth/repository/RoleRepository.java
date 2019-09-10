@@ -1,12 +1,12 @@
 package com.murphy.gee.auth.repository;
 
-import com.murphy.gee.auth.entity.OauthRole;
+import com.murphy.gee.auth.entity.SysRole;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface RoleRepository extends JpaRepository<OauthRole,Long> {
+public interface RoleRepository extends JpaRepository<SysRole,Long> {
     @Query(value = "    SELECT\n" +
             "    a.role_id, role_name, role_enable, role_remark\n" +
             "    FROM sys_role a LEFT JOIN sys_mapping_user_role b ON a.role_id = b.role_id\n" +
@@ -20,5 +20,5 @@ public interface RoleRepository extends JpaRepository<OauthRole,Long> {
             "    LEFT JOIN sys_mapping_group_user smgu ON ugr.group_id = smgu.group_id\n" +
             "    LEFT JOIN sys_user su ON smgu.user_id = su.user_id\n" +
             "    WHERE su.user_name = ?1 AND role.role_enable = 1",nativeQuery = true)
-    List<OauthRole> findOauthRolesByUserName(String userName);
+    List<SysRole> findSysRoleByUserName(String userName);
 }

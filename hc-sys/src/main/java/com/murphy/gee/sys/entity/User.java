@@ -1,5 +1,7 @@
 package com.murphy.gee.sys.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.util.Date;
 
 public class User {
@@ -13,13 +15,23 @@ public class User {
 
     private Integer userEnable;
 
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date createDate;
 
     private String createPerson;
 
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date lastEditDate;
 
     private String lastEditPerson;
+
+    private Integer deptId;
+
+    private String deptName;
+
+    private String roleIds;
+
+    private String roleNames;
 
     public Long getUserId() {
         return userId;
@@ -91,5 +103,37 @@ public class User {
 
     public void setLastEditPerson(String lastEditPerson) {
         this.lastEditPerson = lastEditPerson == null ? null : lastEditPerson.trim();
+    }
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
+
+    public Integer getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(Integer deptId) {
+        this.deptId = deptId;
+    }
+
+    public String getRoleIds() {
+        return roleIds;
+    }
+
+    public void setRoleIds(String roleIds) {
+        this.roleIds = roleIds;
+    }
+
+    public String getRoleNames() {
+        return roleNames;
+    }
+
+    public void setRoleNames(String roleNames) {
+        this.roleNames = roleNames;
     }
 }

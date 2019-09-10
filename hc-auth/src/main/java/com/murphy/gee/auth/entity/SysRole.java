@@ -7,19 +7,18 @@ import java.io.Serializable;
 
 @Data
 @Entity
-@Table(name = "oauth_role")
-public class OauthRole  implements Serializable {
-
+@Table(name = "sys_role")
+public class SysRole  implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "role_id")
+	@Column(name = "role_id",nullable = false)
 	private Long roleId;
-
-	@Column(name = "role_enable")
-	private Long roleEnable;
 
 	@Column(name = "role_name")
 	private String roleName;
+
+	@Column(name = "role_enable")
+	private Long roleEnable;
 
 	@Column(name = "role_remark")
 	private String roleRemark;

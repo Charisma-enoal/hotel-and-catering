@@ -165,6 +165,7 @@ public class UserExample {
             return (Criteria) this;
         }
 
+
         public Criteria andUserNameIsNull() {
             addCriterion("user_name is null");
             return (Criteria) this;
@@ -202,6 +203,10 @@ public class UserExample {
 
         public Criteria andUserNameLessThanOrEqualTo(String value) {
             addCriterion("user_name <=", value, "userName");
+            return (Criteria) this;
+        }
+        public Criteria andUserNameOrUserRealName(String value){
+            addCriterion("(user_name like  \"%"+ value + "%\" or user_real_name like \"%"+value+"%\")");
             return (Criteria) this;
         }
 

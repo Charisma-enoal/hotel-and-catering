@@ -44,6 +44,10 @@ public class JsonResult<T> {
         this.msg = msg;
     }
 
+    public JsonResult(){
+
+    }
+
     /*
      * @description: 失败的构造函数
      * @param murphyResponseCode
@@ -97,6 +101,10 @@ public class JsonResult<T> {
     public static <T> JsonResult<T> success(T data){
         return new JsonResult<T>(data);
     }
+
+    public static JsonResult success(){
+        return new JsonResult().setMsg("操作成功");
+    }
     /*
      * @description: 失败时调用
      * @param murphyResponseCode
@@ -104,7 +112,7 @@ public class JsonResult<T> {
      * @author: Murphy.Gee
      * @date: 2019-07-26 15:49
      */
-    public static <T> JsonResult<T> fial(MurphyResponseCode murphyResponseCode){
+    public static <T> JsonResult<T> fail(MurphyResponseCode murphyResponseCode){
         return new JsonResult<T>(murphyResponseCode);
     }
 }
