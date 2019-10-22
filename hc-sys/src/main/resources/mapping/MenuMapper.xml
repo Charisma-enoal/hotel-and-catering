@@ -1,113 +1,180 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.murphy.gee.sys.mapper.MenuMapper">
-  <resultMap id="BaseResultMap" type="com.murphy.gee.sys.entity.Menu">
-    <id column="menu_id" jdbcType="BIGINT" property="menuId" />
-    <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
-    <result column="menu_url" jdbcType="VARCHAR" property="menuUrl" />
-    <result column="menu_parent_id" jdbcType="BIGINT" property="menuParentId" />
-    <result column="modules_id" jdbcType="BIGINT" property="modulesId" />
-    <result column="menu_remark" jdbcType="VARCHAR" property="menuRemark" />
-    <result column="menu_order" jdbcType="INTEGER" property="menuOrder" />
-    <result column="menu_icon" jdbcType="VARCHAR" property="menuIcon" />
-    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
-    <result column="create_person" jdbcType="VARCHAR" property="createPerson" />
-    <result column="last_edit_date" jdbcType="TIMESTAMP" property="lastEditDate" />
-    <result column="last_edit_person" jdbcType="VARCHAR" property="lastEditPerson" />
-  </resultMap>
-  <resultMap id="MenuResultMap" type="com.murphy.gee.sys.entity.Menu">
-    <id column="menu_id" jdbcType="BIGINT" property="menuId" />
-    <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
-    <result column="menu_url" jdbcType="VARCHAR" property="menuUrl" />
-    <result column="menu_parent_id" jdbcType="BIGINT" property="menuParentId" />
-    <result column="modules_id" jdbcType="BIGINT" property="modulesId" />
-    <result column="menu_remark" jdbcType="VARCHAR" property="menuRemark" />
-    <result column="menu_order" jdbcType="INTEGER" property="menuOrder" />
-    <result column="menu_icon" jdbcType="VARCHAR" property="menuIcon" />
-    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
-    <result column="create_person" jdbcType="VARCHAR" property="createPerson" />
-    <result column="last_edit_date" jdbcType="TIMESTAMP" property="lastEditDate" />
-    <result column="last_edit_person" jdbcType="VARCHAR" property="lastEditPerson" />
-    <collection column="id" property="childMenu" javaType="java.util.ArrayList" ofType="com.murphy.gee.sys.entity.Menu" select="getChildMenu" />
-  </resultMap>
-  <resultMap id="ChildMenuResultMap" type="com.murphy.gee.sys.entity.Menu">
-    <id column="menu_id" jdbcType="BIGINT" property="menuId" />
-    <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
-    <result column="menu_url" jdbcType="VARCHAR" property="menuUrl" />
-    <result column="menu_parent_id" jdbcType="BIGINT" property="menuParentId" />
-    <result column="modules_id" jdbcType="BIGINT" property="modulesId" />
-    <result column="menu_remark" jdbcType="VARCHAR" property="menuRemark" />
-    <result column="menu_order" jdbcType="INTEGER" property="menuOrder" />
-    <result column="menu_icon" jdbcType="VARCHAR" property="menuIcon" />
-    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
-    <result column="create_person" jdbcType="VARCHAR" property="createPerson" />
-    <result column="last_edit_date" jdbcType="TIMESTAMP" property="lastEditDate" />
-    <result column="last_edit_person" jdbcType="VARCHAR" property="lastEditPerson" />
-    <collection column="id" property="childMenu" javaType="java.util.ArrayList" ofType="com.murphy.gee.sys.entity.Menu" select="getChildMenu" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+    <resultMap id="BaseResultMap" type="com.murphy.gee.sys.entity.Menu">
+        <id column="menu_id" jdbcType="BIGINT" property="menuId"/>
+        <result column="menu_name" jdbcType="VARCHAR" property="menuName"/>
+        <result column="menu_url" jdbcType="VARCHAR" property="menuUrl"/>
+        <result column="menu_parent_id" jdbcType="BIGINT" property="menuParentId"/>
+        <result column="modules_id" jdbcType="BIGINT" property="modulesId"/>
+        <result column="menu_remark" jdbcType="VARCHAR" property="menuRemark"/>
+        <result column="menu_order" jdbcType="INTEGER" property="menuOrder"/>
+        <result column="menu_icon" jdbcType="VARCHAR" property="menuIcon"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="create_person" jdbcType="VARCHAR" property="createPerson"/>
+        <result column="last_edit_date" jdbcType="TIMESTAMP" property="lastEditDate"/>
+        <result column="last_edit_person" jdbcType="VARCHAR" property="lastEditPerson"/>
+    </resultMap>
+    <resultMap id="MenuResultMap" type="com.murphy.gee.sys.entity.Menu">
+        <id column="menu_id" jdbcType="BIGINT" property="menuId"/>
+        <result column="menu_name" jdbcType="VARCHAR" property="menuName"/>
+        <result column="menu_url" jdbcType="VARCHAR" property="menuUrl"/>
+        <result column="menu_parent_id" jdbcType="BIGINT" property="menuParentId"/>
+        <result column="modules_id" jdbcType="BIGINT" property="modulesId"/>
+        <result column="menu_remark" jdbcType="VARCHAR" property="menuRemark"/>
+        <result column="menu_order" jdbcType="INTEGER" property="menuOrder"/>
+        <result column="menu_icon" jdbcType="VARCHAR" property="menuIcon"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="create_person" jdbcType="VARCHAR" property="createPerson"/>
+        <result column="last_edit_date" jdbcType="TIMESTAMP" property="lastEditDate"/>
+        <result column="last_edit_person" jdbcType="VARCHAR" property="lastEditPerson"/>
+        <collection column="id=menu_id" property="childMenu" javaType="java.util.ArrayList"
+                    ofType="com.murphy.gee.sys.entity.Menu" select="getChildMenu"/>
+    </resultMap>
+    <resultMap id="ChildMenuResultMap" type="com.murphy.gee.sys.entity.Menu">
+        <id column="menu_id" jdbcType="BIGINT" property="menuId"/>
+        <result column="menu_name" jdbcType="VARCHAR" property="menuName"/>
+        <result column="menu_url" jdbcType="VARCHAR" property="menuUrl"/>
+        <result column="menu_parent_id" jdbcType="BIGINT" property="menuParentId"/>
+        <result column="modules_id" jdbcType="BIGINT" property="modulesId"/>
+        <result column="menu_remark" jdbcType="VARCHAR" property="menuRemark"/>
+        <result column="menu_order" jdbcType="INTEGER" property="menuOrder"/>
+        <result column="menu_icon" jdbcType="VARCHAR" property="menuIcon"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="create_person" jdbcType="VARCHAR" property="createPerson"/>
+        <result column="last_edit_date" jdbcType="TIMESTAMP" property="lastEditDate"/>
+        <result column="last_edit_person" jdbcType="VARCHAR" property="lastEditPerson"/>
+        <collection column="id=menu_id" property="childMenu" javaType="java.util.ArrayList"
+                    ofType="com.murphy.gee.sys.entity.Menu" select="getChildMenu"/>
+    </resultMap>
+
+    <resultMap id="AuthResultMap" type="com.murphy.gee.sys.entity.AuthListModel">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="text" jdbcType="VARCHAR" property="text"/>
+        <result column="value" jdbcType="BIGINT" property="value"/>
+        <result column="icon" jdbcType="BIGINT" property="icon"/>
+        <result column="opened" jdbcType="BIGINT" property="opened"/>
+        <result column="level" jdbcType="BIGINT" property="level"/>
+        <collection column="id=id" property="children" javaType="java.util.ArrayList"
+                    ofType="com.murphy.gee.sys.entity.AuthListModel" select="getChildAuth"/>
+    </resultMap>
+    <resultMap id="ChildAuthResultMap" type="com.murphy.gee.sys.entity.AuthListModel">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="text" jdbcType="VARCHAR" property="text"/>
+        <result column="value" jdbcType="BIGINT" property="value"/>
+        <result column="icon" jdbcType="BIGINT" property="icon"/>
+        <result column="opened" jdbcType="BIGINT" property="opened"/>
+        <result column="level" jdbcType="BIGINT" property="level"/>
+        <collection column="id=id" property="children" javaType="java.util.ArrayList"
+                    ofType="com.murphy.gee.sys.entity.AuthListModel" select="getChildAuth"/>
+    </resultMap>
+
+    <resultMap id="TreeAuthResult" type="com.murphy.gee.common.entity.AuthTreeSelect">
+        <id column="elementId" jdbcType="BIGINT" property="elementId"/>
+        <result column="label" jdbcType="VARCHAR" property="label"/>
+        <result column="parent" jdbcType="BIGINT" property="parent"/>
+        <result column="id" jdbcType="BIGINT" property="id"/>
+        <collection column="id=elementId" property="children" javaType="java.util.ArrayList"
+                    ofType="com.murphy.gee.common.entity.AuthTreeSelect" select="getChildMenuForAuthByModulesId"/>
+    </resultMap>
+    <resultMap id="TreeAuthChildResult" type="com.murphy.gee.common.entity.AuthTreeSelect">
+        <id column="elementId" jdbcType="BIGINT" property="elementId"/>
+        <result column="label" jdbcType="VARCHAR" property="label"/>
+        <result column="parent" jdbcType="BIGINT" property="parent"/>
+        <result column="id" jdbcType="BIGINT" property="id"/>
+        <collection column="id=elementId" property="children" javaType="java.util.ArrayList"
+                    ofType="com.murphy.gee.common.entity.AuthTreeSelect" select="getChildMenuForAuthByModulesId"/>
+    </resultMap>
+    <select id="getMenuForAuthByModulesId" parameterType="java.lang.Integer" resultMap="TreeAuthResult">
+        SELECT
+        a.auth_id as id,
+        c.menu_name as label,
+        0 as parent,
+        c.menu_id as elementId
+        FROM sys_authority a
+        LEFT JOIN sys_mapping_authority_menu b ON a.auth_id = b.auth_id
+        LEFT JOIN sys_menu c ON b.menu_id = c.menu_id
+        WHERE a.auth_type = 2
+        AND c.modules_id = #{elementId,jdbcType=BIGINT}
+        AND c.menu_parent_id IS NULL
+    </select>
+    <select id="getChildMenuForAuthByModulesId" resultMap="TreeAuthChildResult">
+        SELECT
+        a.auth_id as id,
+        c.menu_name as label,
+        c.menu_parent_id as parent,
+        c.menu_id as elementId
+        FROM sys_authority a
+        LEFT JOIN sys_mapping_authority_menu b ON a.auth_id = b.auth_id
+        LEFT JOIN sys_menu c ON b.menu_id = c.menu_id
+        WHERE a.auth_type = 2
+        AND c.menu_parent_id = #{id,jdbcType=BIGINT}
+    </select>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    menu_id, menu_name, menu_url, menu_parent_id, modules_id, menu_remark, menu_order, 
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    menu_id, menu_name, menu_url, menu_parent_id, modules_id, menu_remark, menu_order, menu_icon,
     create_date, create_person, last_edit_date, last_edit_person
   </sql>
-  <select id="getChildMenu" resultMap="ChildMenuResultMap">
+    <select id="getChildMenu" resultMap="ChildMenuResultMap">
     SELECT
 	a.menu_id,
 	a.menu_name,
@@ -118,9 +185,22 @@
 	a.menu_icon
 FROM
 	sys_menu a
-WHERE a.menu_id = #{id,jdbcType=BIGINT}
+WHERE a.menu_parent_id = #{id,jdbcType=BIGINT}
   </select>
-  <select id="findMenuByUserName" parameterType="java.lang.String" resultMap="MenuResultMap">
+    <select id="getChildAuth" resultMap="ChildAuthResultMap">
+    SELECT
+	a.menu_id as 'id',
+	a.menu_name as 'text',
+	a.menu_id as 'value',
+	'ivu-icon ivu-icon-md-folder' as 'icon',
+    false as 'opened',
+    2 as 'level',
+    a.modules_id as 'moduleId'
+FROM
+	sys_menu a
+WHERE a.menu_parent_id = #{id,jdbcType=BIGINT}
+  </select>
+    <select id="findMenuByUserName" parameterType="java.lang.String" resultMap="MenuResultMap">
     SELECT
 	a.menu_id,
 	a.menu_name,
@@ -138,7 +218,10 @@ FROM
 	LEFT JOIN sys_mapping_user_role f ON e.role_id = f.role_id
 	LEFT JOIN sys_user g ON f.user_id = g.user_id
 WHERE
-	g.user_name = #{userName,jdbcType=VARCHAR} AND g.user_enable = 1 AND e.role_enable = 1 AND a.modules_id = #{modulesId,jdbcType=BIGINT}#
+	g.user_name = #{userName,jdbcType=VARCHAR}
+	AND g.user_enable = 1 AND e.role_enable = 1
+	AND a.modules_id = #{modulesId,jdbcType=BIGINT}#
+	AND a.menu_parent_id IS NULL
 
 UNION
 
@@ -161,10 +244,12 @@ FROM
 	LEFT JOIN sys_mapping_group_user h ON g.group_id = h.group_id
 	LEFT JOIN sys_user i ON h.user_id = i.user_id
 WHERE
-	i.user_name = #{userName,jdbcType=VARCHAR} AND i.user_enable = 1 AND e.role_enable = 1 AND a.modules_id = #{modulesId,jdbcType=BIGINT}#
+	i.user_name = #{userName,jdbcType=VARCHAR} AND i.user_enable = 1
+	AND e.role_enable = 1 AND a.modules_id = #{modulesId,jdbcType=BIGINT}#
+	AND a.menu_parent_id IS NULL
   </select>
 
-  <select id="findMenuByModulesId" parameterType="java.lang.Long" resultMap="MenuResultMap">
+    <select id="findMenuByModulesId" parameterType="java.lang.Long" resultMap="MenuResultMap">
     SELECT
 	a.menu_id,
 	a.menu_name,
@@ -183,7 +268,7 @@ FROM
 	LEFT JOIN sys_user g ON f.user_id = g.user_id
 WHERE
 	g.user_enable = 1 AND e.role_enable = 1 AND a.modules_id = #{modulesId,jdbcType=BIGINT}#
-
+    AND a.menu_parent_id IS NULL
 UNION
 
 SELECT
@@ -206,235 +291,251 @@ FROM
 	LEFT JOIN sys_user i ON h.user_id = i.user_id
 WHERE
 	i.user_enable = 1 AND e.role_enable = 1 AND a.modules_id = #{modulesId,jdbcType=BIGINT}#
+	AND a.menu_parent_id IS NULL
   </select>
 
-  <select id="selectByExample" parameterType="com.murphy.gee.sys.entity.MenuExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from sys_menu
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
+    <select id="findAuthByModuleId" parameterType="java.lang.Integer" resultMap="AuthResultMap">
+    SELECT
+	a.menu_id as 'id',
+	a.menu_name as 'text',
+	a.menu_id as 'value',
+	'ivu-icon ivu-icon-md-folder' as 'icon',
+    false as 'opened',
+    2 as 'level',
+    a.modules_id as 'moduleId'
+FROM
+	sys_menu a
+where a.modules_id = #{moduleId,jdbcType=BIGINT}
+AND a.menu_parent_id IS NULL
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from sys_menu
-    where menu_id = #{menuId,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+
+    <select id="selectByExample" parameterType="com.murphy.gee.sys.entity.MenuExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from sys_menu
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_menu
+        where menu_id = #{menuId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from sys_menu
     where menu_id = #{menuId,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.murphy.gee.sys.entity.MenuExample">
-    delete from sys_menu
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.murphy.gee.sys.entity.Menu">
-    insert into sys_menu (menu_id, menu_name, menu_url, 
+    <delete id="deleteByExample" parameterType="com.murphy.gee.sys.entity.MenuExample">
+        delete from sys_menu
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="menuId" keyColumn="menu_id" parameterType="com.murphy.gee.sys.entity.Menu">
+    insert into sys_menu (menu_name, menu_url,
       menu_parent_id, modules_id, menu_remark, 
       menu_order,menu_icon, create_date, create_person,
       last_edit_date, last_edit_person)
-    values (#{menuId,jdbcType=BIGINT}, #{menuName,jdbcType=VARCHAR}, #{menuUrl,jdbcType=VARCHAR}, 
+    values (#{menuName,jdbcType=VARCHAR}, #{menuUrl,jdbcType=VARCHAR},
       #{menuParentId,jdbcType=BIGINT}, #{modulesId,jdbcType=BIGINT}, #{menuRemark,jdbcType=VARCHAR}, 
-      #{menuOrder,jdbcType=INTEGER},#{menuIcon,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{createPerson,jdbcType=VARCHAR},
-      #{lastEditDate,jdbcType=TIMESTAMP}, #{lastEditPerson,jdbcType=VARCHAR})
+      #{menuOrder,jdbcType=INTEGER},#{menuIcon,jdbcType=VARCHAR}, SYSDATE(), #{createPerson,jdbcType=VARCHAR},
+      SYSDATE(), #{lastEditPerson,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.murphy.gee.sys.entity.Menu">
-    insert into sys_menu
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="menuId != null">
-        menu_id,
-      </if>
-      <if test="menuName != null">
-        menu_name,
-      </if>
-      <if test="menuUrl != null">
-        menu_url,
-      </if>
-      <if test="menuParentId != null">
-        menu_parent_id,
-      </if>
-      <if test="modulesId != null">
-        modules_id,
-      </if>
-      <if test="menuRemark != null">
-        menu_remark,
-      </if>
-      <if test="menuOrder != null">
-        menu_order,
-      </if>
-      <if test="menuIcon != null">
-        menu_icon,
-      </if>
-      <if test="createDate != null">
-        create_date,
-      </if>
-      <if test="createPerson != null">
-        create_person,
-      </if>
-      <if test="lastEditDate != null">
-        last_edit_date,
-      </if>
-      <if test="lastEditPerson != null">
-        last_edit_person,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="menuId != null">
-        #{menuId,jdbcType=BIGINT},
-      </if>
-      <if test="menuName != null">
-        #{menuName,jdbcType=VARCHAR},
-      </if>
-      <if test="menuUrl != null">
-        #{menuUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="menuParentId != null">
-        #{menuParentId,jdbcType=BIGINT},
-      </if>
-      <if test="modulesId != null">
-        #{modulesId,jdbcType=BIGINT},
-      </if>
-      <if test="menuRemark != null">
-        #{menuRemark,jdbcType=VARCHAR},
-      </if>
-      <if test="menuOrder != null">
-        #{menuOrder,jdbcType=INTEGER},
-      </if>
-      <if test="menuIcon != null">
-        #{menuIcon,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null">
-        #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createPerson != null">
-        #{createPerson,jdbcType=VARCHAR},
-      </if>
-      <if test="lastEditDate != null">
-        #{lastEditDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="lastEditPerson != null">
-        #{lastEditPerson,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.murphy.gee.sys.entity.MenuExample" resultType="java.lang.Long">
-    select count(*) from sys_menu
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update sys_menu
-    <set>
-      <if test="record.menuId != null">
-        menu_id = #{record.menuId,jdbcType=BIGINT},
-      </if>
-      <if test="record.menuName != null">
+    <insert id="insertSelective" parameterType="com.murphy.gee.sys.entity.Menu">
+        insert into sys_menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="menuId != null">
+                menu_id,
+            </if>
+            <if test="menuName != null">
+                menu_name,
+            </if>
+            <if test="menuUrl != null">
+                menu_url,
+            </if>
+            <if test="menuParentId != null">
+                menu_parent_id,
+            </if>
+            <if test="modulesId != null">
+                modules_id,
+            </if>
+            <if test="menuRemark != null">
+                menu_remark,
+            </if>
+            <if test="menuOrder != null">
+                menu_order,
+            </if>
+            <if test="menuIcon != null">
+                menu_icon,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="createPerson != null">
+                create_person,
+            </if>
+            <if test="lastEditDate != null">
+                last_edit_date,
+            </if>
+            <if test="lastEditPerson != null">
+                last_edit_person,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="menuId != null">
+                #{menuId,jdbcType=BIGINT},
+            </if>
+            <if test="menuName != null">
+                #{menuName,jdbcType=VARCHAR},
+            </if>
+            <if test="menuUrl != null">
+                #{menuUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="menuParentId != null">
+                #{menuParentId,jdbcType=BIGINT},
+            </if>
+            <if test="modulesId != null">
+                #{modulesId,jdbcType=BIGINT},
+            </if>
+            <if test="menuRemark != null">
+                #{menuRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="menuOrder != null">
+                #{menuOrder,jdbcType=INTEGER},
+            </if>
+            <if test="menuIcon != null">
+                #{menuIcon,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createPerson != null">
+                #{createPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="lastEditDate != null">
+                #{lastEditDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastEditPerson != null">
+                #{lastEditPerson,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.murphy.gee.sys.entity.MenuExample" resultType="java.lang.Long">
+        select count(*) from sys_menu
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update sys_menu
+        <set>
+            <if test="record.menuId != null">
+                menu_id = #{record.menuId,jdbcType=BIGINT},
+            </if>
+            <if test="record.menuName != null">
+                menu_name = #{record.menuName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.menuUrl != null">
+                menu_url = #{record.menuUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="record.menuParentId != null">
+                menu_parent_id = #{record.menuParentId,jdbcType=BIGINT},
+            </if>
+            <if test="record.modulesId != null">
+                modules_id = #{record.modulesId,jdbcType=BIGINT},
+            </if>
+            <if test="record.menuRemark != null">
+                menu_remark = #{record.menuRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.menuOrder != null">
+                menu_order = #{record.menuOrder,jdbcType=INTEGER},
+            </if>
+            <if test="record.menuIcon != null">
+                menu_icon = #{record.menuIcon,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createDate != null">
+                create_date = #{record.createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.createPerson != null">
+                create_person = #{record.createPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="record.lastEditDate != null">
+                last_edit_date = #{record.lastEditDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.lastEditPerson != null">
+                last_edit_person = #{record.lastEditPerson,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update sys_menu
+        set menu_id = #{record.menuId,jdbcType=BIGINT},
         menu_name = #{record.menuName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.menuUrl != null">
         menu_url = #{record.menuUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="record.menuParentId != null">
         menu_parent_id = #{record.menuParentId,jdbcType=BIGINT},
-      </if>
-      <if test="record.modulesId != null">
         modules_id = #{record.modulesId,jdbcType=BIGINT},
-      </if>
-      <if test="record.menuRemark != null">
         menu_remark = #{record.menuRemark,jdbcType=VARCHAR},
-      </if>
-      <if test="record.menuOrder != null">
         menu_order = #{record.menuOrder,jdbcType=INTEGER},
-      </if>
-      <if test="record.menuIcon != null">
         menu_icon = #{record.menuIcon,jdbcType=VARCHAR},
-      </if>
-      <if test="record.createDate != null">
         create_date = #{record.createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.createPerson != null">
         create_person = #{record.createPerson,jdbcType=VARCHAR},
-      </if>
-      <if test="record.lastEditDate != null">
         last_edit_date = #{record.lastEditDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.lastEditPerson != null">
-        last_edit_person = #{record.lastEditPerson,jdbcType=VARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update sys_menu
-    set menu_id = #{record.menuId,jdbcType=BIGINT},
-      menu_name = #{record.menuName,jdbcType=VARCHAR},
-      menu_url = #{record.menuUrl,jdbcType=VARCHAR},
-      menu_parent_id = #{record.menuParentId,jdbcType=BIGINT},
-      modules_id = #{record.modulesId,jdbcType=BIGINT},
-      menu_remark = #{record.menuRemark,jdbcType=VARCHAR},
-      menu_order = #{record.menuOrder,jdbcType=INTEGER},
-      menu_icon = #{record.menuIcon,jdbcType=VARCHAR},
-      create_date = #{record.createDate,jdbcType=TIMESTAMP},
-      create_person = #{record.createPerson,jdbcType=VARCHAR},
-      last_edit_date = #{record.lastEditDate,jdbcType=TIMESTAMP},
-      last_edit_person = #{record.lastEditPerson,jdbcType=VARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.murphy.gee.sys.entity.Menu">
-    update sys_menu
-    <set>
-      <if test="menuName != null">
-        menu_name = #{menuName,jdbcType=VARCHAR},
-      </if>
-      <if test="menuUrl != null">
-        menu_url = #{menuUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="menuParentId != null">
-        menu_parent_id = #{menuParentId,jdbcType=BIGINT},
-      </if>
-      <if test="modulesId != null">
-        modules_id = #{modulesId,jdbcType=BIGINT},
-      </if>
-      <if test="menuRemark != null">
-        menu_remark = #{menuRemark,jdbcType=VARCHAR},
-      </if>
-      <if test="menuOrder != null">
-        menu_order = #{menuOrder,jdbcType=INTEGER},
-      </if>
-      <if test="menuIcon != null">
-        menu_icon = #{menuIcon,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null">
-        create_date = #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createPerson != null">
-        create_person = #{createPerson,jdbcType=VARCHAR},
-      </if>
-      <if test="lastEditDate != null">
-        last_edit_date = #{lastEditDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="lastEditPerson != null">
-        last_edit_person = #{lastEditPerson,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where menu_id = #{menuId,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.murphy.gee.sys.entity.Menu">
+        last_edit_person = #{record.lastEditPerson,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.murphy.gee.sys.entity.Menu">
+        update sys_menu
+        <set>
+            <if test="menuName != null">
+                menu_name = #{menuName,jdbcType=VARCHAR},
+            </if>
+            <if test="menuUrl != null">
+                menu_url = #{menuUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="menuParentId != null">
+                menu_parent_id = #{menuParentId,jdbcType=BIGINT},
+            </if>
+            <if test="modulesId != null">
+                modules_id = #{modulesId,jdbcType=BIGINT},
+            </if>
+            <if test="menuRemark != null">
+                menu_remark = #{menuRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="menuOrder != null">
+                menu_order = #{menuOrder,jdbcType=INTEGER},
+            </if>
+            <if test="menuIcon != null">
+                menu_icon = #{menuIcon,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createPerson != null">
+                create_person = #{createPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="lastEditDate != null">
+                last_edit_date = #{lastEditDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastEditPerson != null">
+                last_edit_person = #{lastEditPerson,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where menu_id = #{menuId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.murphy.gee.sys.entity.Menu">
     update sys_menu
     set menu_name = #{menuName,jdbcType=VARCHAR},
       menu_url = #{menuUrl,jdbcType=VARCHAR},
@@ -443,9 +544,7 @@ WHERE
       menu_remark = #{menuRemark,jdbcType=VARCHAR},
       menu_order = #{menuOrder,jdbcType=INTEGER},
       menu_icon = #{menuIcon,jdbcType=VARCHAR},
-      create_date = #{createDate,jdbcType=TIMESTAMP},
-      create_person = #{createPerson,jdbcType=VARCHAR},
-      last_edit_date = #{lastEditDate,jdbcType=TIMESTAMP},
+      last_edit_date = SYSDATE(),
       last_edit_person = #{lastEditPerson,jdbcType=VARCHAR}
     where menu_id = #{menuId,jdbcType=BIGINT}
   </update>

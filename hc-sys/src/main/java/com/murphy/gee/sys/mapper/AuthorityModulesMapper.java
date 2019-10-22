@@ -4,7 +4,9 @@ import com.murphy.gee.sys.entity.AuthorityModules;
 import com.murphy.gee.sys.entity.AuthorityModulesExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository("authorityModulesMapper")
 public interface AuthorityModulesMapper {
     long countByExample(AuthorityModulesExample example);
 

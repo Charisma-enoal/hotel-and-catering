@@ -33,4 +33,6 @@ public interface UserRoleMapper {
     void insertBatch(List<UserRole> list);
 
     void deleteRolesByUserId(Long userId);
+
+    Integer countByRoleId(Long roleId);
 }

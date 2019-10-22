@@ -132,12 +132,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.murphy.gee.sys.entity.Group">
-    insert into sys_user_group (group_id, group_name, group_parent_id, 
+    insert into sys_user_group (group_name, group_parent_id,
       group_remark, create_date, create_person, 
       last_edit_date, last_edit_person)
-    values (#{groupId,jdbcType=BIGINT}, #{groupName,jdbcType=VARCHAR}, #{groupParentId,jdbcType=BIGINT}, 
-      #{groupRemark,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{createPerson,jdbcType=VARCHAR}, 
-      #{lastEditDate,jdbcType=TIMESTAMP}, #{lastEditPerson,jdbcType=VARCHAR})
+    values (#{groupName,jdbcType=VARCHAR}, #{groupParentId,jdbcType=BIGINT},
+      #{groupRemark,jdbcType=VARCHAR}, sysdate(), #{createPerson,jdbcType=VARCHAR},
+      sysdate(), #{lastEditPerson,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.murphy.gee.sys.entity.Group">
     insert into sys_user_group
@@ -234,13 +234,11 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update sys_user_group
-    set group_id = #{record.groupId,jdbcType=BIGINT},
-      group_name = #{record.groupName,jdbcType=VARCHAR},
-      group_parent_id = #{record.groupParentId,jdbcType=BIGINT},
+    set group_name = #{record.groupName,jdbcType=VARCHAR},
       group_remark = #{record.groupRemark,jdbcType=VARCHAR},
-      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      create_date = sysdate(),
       create_person = #{record.createPerson,jdbcType=VARCHAR},
-      last_edit_date = #{record.lastEditDate,jdbcType=TIMESTAMP},
+      last_edit_date = sysdate(),
       last_edit_person = #{record.lastEditPerson,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />

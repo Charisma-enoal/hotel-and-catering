@@ -99,9 +99,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.murphy.gee.sys.entity.Role">
-    insert into sys_role (role_id, role_name, role_enable, 
+    insert into sys_role (role_name, role_enable,
       role_remark)
-    values (#{roleId,jdbcType=BIGINT}, #{roleName,jdbcType=VARCHAR}, #{roleEnable,jdbcType=INTEGER}, 
+    values (#{roleName,jdbcType=VARCHAR}, #{roleEnable,jdbcType=INTEGER},
       #{roleRemark,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.murphy.gee.sys.entity.Role">

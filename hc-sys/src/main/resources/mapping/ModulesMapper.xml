@@ -87,6 +87,16 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="findAllModules" resultType="com.murphy.gee.sys.entity.AuthListModel">
+    select
+    a.modules_id as 'id',
+    a.modules_name as 'text',
+    a.modules_id as 'value',
+    'ivu-icon ivu-icon-logo-dropbox' as 'icon',
+    true as 'opened',
+    1 as 'level'
+    from sys_modules a
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -138,13 +148,13 @@ WHERE
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.murphy.gee.sys.entity.Modules">
-    insert into sys_modules (modules_id, modules_name, modules_remark, 
+  <insert id="insert" useGeneratedKeys="true" keyProperty="modulesId" keyColumn="modules_id" parameterType="com.murphy.gee.sys.entity.Modules">
+    insert into sys_modules (modules_name, modules_remark,
       modules_order, create_date, create_person, 
       last_edit_date, last_edit_person)
-    values (#{modulesId,jdbcType=BIGINT}, #{modulesName,jdbcType=VARCHAR}, #{modulesRemark,jdbcType=VARCHAR}, 
-      #{modulesOrder,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{createPerson,jdbcType=VARCHAR}, 
-      #{lastEditDate,jdbcType=TIMESTAMP}, #{lastEditPerson,jdbcType=VARCHAR})
+    values (#{modulesName,jdbcType=VARCHAR}, #{modulesRemark,jdbcType=VARCHAR},
+      #{modulesOrder,jdbcType=INTEGER}, SYSDATE(), #{createPerson,jdbcType=VARCHAR},
+      SYSDATE(), #{lastEditPerson,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.murphy.gee.sys.entity.Modules">
     insert into sys_modules
@@ -201,6 +211,19 @@ WHERE
       </if>
     </trim>
   </insert>
+
+  <select id="findAllModulesForAuth" resultType="com.murphy.gee.common.entity.AuthTreeSelect">
+    SELECT
+    a.auth_id as id,
+    c.modules_name as label,
+    -1 as parent,
+    c.modules_id as elementId
+    FROM sys_authority a
+    LEFT JOIN sys_mapping_authority_modules b ON a.auth_id = b.auth_id
+    LEFT JOIN sys_modules c ON b.modules_id = c.modules_id
+    WHERE a.auth_type = 1
+  </select>
+
   <select id="countByExample" parameterType="com.murphy.gee.sys.entity.ModulesExample" resultType="java.lang.Long">
     select count(*) from sys_modules
     <if test="_parameter != null">
@@ -285,9 +308,7 @@ WHERE
     set modules_name = #{modulesName,jdbcType=VARCHAR},
       modules_remark = #{modulesRemark,jdbcType=VARCHAR},
       modules_order = #{modulesOrder,jdbcType=INTEGER},
-      create_date = #{createDate,jdbcType=TIMESTAMP},
-      create_person = #{createPerson,jdbcType=VARCHAR},
-      last_edit_date = #{lastEditDate,jdbcType=TIMESTAMP},
+      last_edit_date = SYSDATE(),
       last_edit_person = #{lastEditPerson,jdbcType=VARCHAR}
     where modules_id = #{modulesId,jdbcType=BIGINT}
   </update>

@@ -14,7 +14,10 @@ public enum MurphyResponseCode {
     NOT_FOUND(404),
 
     // 服务器内部错误
-    INTERNAL_SERVER_ERROR(500);
+    INTERNAL_SERVER_ERROR(500),
+
+    // 后台校验错误
+    VALIDATE_ERROR(-1);
 
     public int code;
 

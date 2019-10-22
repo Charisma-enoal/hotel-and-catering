@@ -4,7 +4,9 @@ import com.murphy.gee.sys.entity.AuthorityMenu;
 import com.murphy.gee.sys.entity.AuthorityMenuExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository("authorityMenuMapper")
 public interface AuthorityMenuMapper {
     long countByExample(AuthorityMenuExample example);
 

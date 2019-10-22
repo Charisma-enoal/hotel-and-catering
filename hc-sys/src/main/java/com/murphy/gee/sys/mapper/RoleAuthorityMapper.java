@@ -3,8 +3,12 @@ package com.murphy.gee.sys.mapper;
 import com.murphy.gee.sys.entity.RoleAuthority;
 import com.murphy.gee.sys.entity.RoleAuthorityExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+
+@Repository("roleAuthorityMapper")
 public interface RoleAuthorityMapper {
     long countByExample(RoleAuthorityExample example);
 
@@ -27,4 +31,6 @@ public interface RoleAuthorityMapper {
     int updateByPrimaryKeySelective(RoleAuthority record);
 
     int updateByPrimaryKey(RoleAuthority record);
+
+    void insertBatch(Map map);
 }

@@ -1,5 +1,7 @@
 package com.murphy.gee.sys.mapper;
 
+import com.murphy.gee.common.entity.AuthTreeSelect;
+import com.murphy.gee.sys.entity.AuthListModel;
 import com.murphy.gee.sys.entity.Menu;
 import com.murphy.gee.sys.entity.MenuExample;
 import java.util.List;
@@ -45,4 +47,15 @@ public interface MenuMapper {
      * @date: 2019-08-27 11:08
      */
     List<Menu> findMenuByModulesId(Long modulesId);
+
+    /*
+     * @description: 权限配置列表，根据模块获取到模块的所有菜单
+     * @param moduleId
+     * @return: java.util.List<com.murphy.gee.sys.entity.AuthListModel>
+     * @author: Murphy.Gee
+     * @date: 2019-09-12 12:26
+     */
+    List<AuthListModel> findAuthByModuleId(Integer moduleId);
+
+    List<AuthTreeSelect> getMenuForAuthByModulesId(Integer elementId);
 }

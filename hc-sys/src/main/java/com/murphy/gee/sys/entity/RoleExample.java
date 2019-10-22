@@ -205,7 +205,7 @@ public class RoleExample {
         }
 
         public Criteria andRoleNameLike(String value) {
-            addCriterion("role_name like", value, "roleName");
+            addCriterion("role_name like \"%" + value + "%\"");
             return (Criteria) this;
         }
 

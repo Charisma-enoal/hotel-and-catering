@@ -82,6 +82,30 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="findAuthTreeForMenuId" parameterType="java.lang.Integer" resultType="com.murphy.gee.common.entity.AuthTreeSelect">
+    SELECT
+    a.auth_id as id,
+    c.action_name as label,
+    c.menu_id as parent,
+    c.action_id as elementId
+    FROM sys_authority a
+    LEFT JOIN sys_mapping_authority_action b ON a.auth_id = b.auth_id
+    LEFT JOIN sys_action c ON b.action_id = c.action_id
+    WHERE a.auth_type = 3
+    AND c.menu_id = #{elementId,jdbcType=BIGINT}
+  </select>
+  <select id="findListByMenuId" parameterType="java.lang.Integer" resultType="com.murphy.gee.sys.entity.AuthListModel">
+    SELECT
+	a.action_id as 'id',
+	a.action_name as 'text',
+	a.action_id as 'value',
+	'ivu-icon ivu-icon-ios-options' as 'icon',
+    false as 'opened',
+    3 as 'level'
+FROM
+	sys_action a
+WHERE a.menu_id = #{menuId,jdbcType=BIGINT}
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -98,10 +122,10 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.murphy.gee.sys.entity.Action">
-    insert into sys_action (action_id, menu_id, action_name, 
+  <insert id="insert" useGeneratedKeys="true" keyProperty="actionId" keyColumn="action_id" parameterType="com.murphy.gee.sys.entity.Action">
+    insert into sys_action (menu_id, action_name,
       action_remark)
-    values (#{actionId,jdbcType=BIGINT}, #{menuId,jdbcType=BIGINT}, #{actionName,jdbcType=VARCHAR}, 
+    values (#{menuId,jdbcType=BIGINT}, #{actionName,jdbcType=VARCHAR},
       #{actionRemark,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.murphy.gee.sys.entity.Action">

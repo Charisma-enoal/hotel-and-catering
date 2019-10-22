@@ -1,10 +1,15 @@
 package com.murphy.gee.sys.mapper;
 
+import com.murphy.gee.common.entity.AuthTreeSelect;
 import com.murphy.gee.sys.entity.Action;
 import com.murphy.gee.sys.entity.ActionExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import com.murphy.gee.sys.entity.AuthListModel;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+
+@Repository("actionMapper")
 public interface ActionMapper {
     long countByExample(ActionExample example);
 
@@ -27,4 +32,7 @@ public interface ActionMapper {
     int updateByPrimaryKeySelective(Action record);
 
     int updateByPrimaryKey(Action record);
+
+    List<AuthListModel> findListByMenuId(Integer menuId);
+    List<AuthTreeSelect> findAuthTreeForMenuId(Integer elementId);
 }

@@ -103,6 +103,14 @@
     values (#{mappingId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, #{authId,jdbcType=BIGINT}
       )
   </insert>
+  <insert id="insertBatch" parameterType="java.util.Map">
+    insert into sys_mapping_role_authority (role_id, auth_id
+      )
+    values
+    <foreach collection="authArr" index="index" item="item" separator=",">
+      ( #{roleId}, #{item} )
+    </foreach>
+  </insert>
   <insert id="insertSelective" parameterType="com.murphy.gee.sys.entity.RoleAuthority">
     insert into sys_mapping_role_authority
     <trim prefix="(" suffix=")" suffixOverrides=",">

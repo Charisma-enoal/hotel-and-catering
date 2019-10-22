@@ -67,6 +67,9 @@
   <sql id="Base_Column_List">
     mapping_id, user_id, role_id
   </sql>
+  <select id="countByRoleId" parameterType="java.lang.Long" resultType="java.lang.Integer">
+    select count(1) from sys_mapping_user_role where role_id = #{roleId,jdbcType=BIGINT}
+  </select>
   <select id="selectByExample" parameterType="com.murphy.gee.sys.entity.UserRoleExample" resultMap="BaseResultMap">
     select
     <if test="distinct">

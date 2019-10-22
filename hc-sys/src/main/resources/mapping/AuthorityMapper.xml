@@ -135,9 +135,9 @@ WHERE g.user_name = #{userName,jdbcType=VARCHAR}  AND g.user_enable = 1 AND c.ro
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.murphy.gee.sys.entity.Authority">
-    insert into sys_authority (auth_id, auth_type)
-    values (#{authId,jdbcType=BIGINT}, #{authType,jdbcType=VARCHAR})
+  <insert id="insert" useGeneratedKeys="true" keyProperty="authId" keyColumn="auth_id" parameterType="com.murphy.gee.sys.entity.Authority">
+    insert into sys_authority (auth_type)
+    values (#{authType,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.murphy.gee.sys.entity.Authority">
     insert into sys_authority

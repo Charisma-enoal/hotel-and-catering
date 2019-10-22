@@ -67,6 +67,9 @@
   <sql id="Base_Column_List">
     mapping_id, group_id, role_id
   </sql>
+  <select id="countByRoleId" parameterType="java.lang.Long" resultType="java.lang.Integer">
+    select count(1) from sys_mapping_group_role where role_id = #{roleId,jdbcType=BIGINT}
+  </select>
   <select id="selectByExample" parameterType="com.murphy.gee.sys.entity.GroupRoleExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -87,6 +90,14 @@
     from sys_mapping_group_role
     where mapping_id = #{mappingId,jdbcType=BIGINT}
   </select>
+
+  <select id="initDeptRoles" parameterType="java.lang.Long" resultType="java.lang.Long">
+    select
+    role_id
+    from sys_mapping_group_role
+    where group_id = #{groupId,jdbcType=BIGINT}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from sys_mapping_group_role
     where mapping_id = #{mappingId,jdbcType=BIGINT}
@@ -103,6 +114,15 @@
     values (#{mappingId,jdbcType=BIGINT}, #{groupId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}
       )
   </insert>
+
+  <insert id="insertBatch">
+    insert into sys_mapping_group_role (group_id, role_id)
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.groupId},#{item.roleId})
+    </foreach>
+  </insert>
+
   <insert id="insertSelective" parameterType="com.murphy.gee.sys.entity.GroupRole">
     insert into sys_mapping_group_role
     <trim prefix="(" suffix=")" suffixOverrides=",">

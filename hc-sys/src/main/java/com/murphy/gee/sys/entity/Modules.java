@@ -93,4 +93,5 @@ public class Modules {
     public void setMenuList(List<Menu> menuList) {
         this.menuList = menuList;
     }
+
 }

@@ -4,7 +4,9 @@ import com.murphy.gee.sys.entity.GroupRole;
 import com.murphy.gee.sys.entity.GroupRoleExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository("groupRoleMapper")
 public interface GroupRoleMapper {
     long countByExample(GroupRoleExample example);
 
@@ -27,4 +29,10 @@ public interface GroupRoleMapper {
     int updateByPrimaryKeySelective(GroupRole record);
 
     int updateByPrimaryKey(GroupRole record);
+
+    List<Long> initDeptRoles(@Param("groupId") Long groupId);
+
+    void insertBatch(List<GroupRole> list);
+
+    Integer countByRoleId(Long roleId);
 }

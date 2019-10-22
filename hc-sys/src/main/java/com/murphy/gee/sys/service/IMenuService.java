@@ -1,7 +1,9 @@
 package com.murphy.gee.sys.service;
 
+import com.murphy.gee.common.exception.MurphyException;
 import com.murphy.gee.sys.entity.Menu;
 import com.murphy.gee.sys.entity.Modules;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,4 +23,32 @@ public interface IMenuService {
      * @date: 2019-08-09 15:14
      */
     List<Modules> findMenuByUserName(String userName);
+
+    /*
+     * @description: 新增菜单
+     * @param menu
+     * @return: void
+     * @author: Murphy.Gee
+     * @date: 2019-10-08 14:12
+     */
+    @Transactional(readOnly = false,rollbackFor = Exception.class)
+    void save(Menu menu) throws MurphyException;
+
+    /*
+     * @description: 查看
+     * @param menuId
+     * @return: com.murphy.gee.sys.entity.Menu
+     * @author: Murphy.Gee
+     * @date: 2019-10-08 15:24
+     */
+    Menu view(Long menuId);
+    /*
+     * @description: 删除
+     * @param menuId
+     * @return: void
+     * @author: Murphy.Gee
+     * @date: 2019-10-08 17:00
+     */
+    @Transactional(readOnly = false,rollbackFor = Exception.class)
+    void delete(Long menuId) throws MurphyException;
 }

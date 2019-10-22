@@ -1,22 +1,29 @@
 package com.murphy.gee.sys.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.Date;
-
+@ApiModel(value = "部门对象",description = "用于部门管理操作的对象")
 public class Group {
+    @ApiModelProperty(value = "主键ID",example = "1")
     private Long groupId;
-
+    @ApiModelProperty(value = "部门名称")
     private String groupName;
-
+    @ApiModelProperty(value = "父级部门ID",example = "1")
     private Long groupParentId;
-
+    @ApiModelProperty(value = "部门备注")
     private String groupRemark;
-
+    @ApiModelProperty(value = "创建时间")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date createDate;
-
+    @ApiModelProperty(value = "创建人")
     private String createPerson;
-
+    @ApiModelProperty(value = "最后操作时间")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date lastEditDate;
-
+    @ApiModelProperty(value = "最后操作人")
     private String lastEditPerson;
 
     public Long getGroupId() {

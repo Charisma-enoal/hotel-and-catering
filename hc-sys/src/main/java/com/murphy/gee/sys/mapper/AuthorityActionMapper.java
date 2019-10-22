@@ -4,7 +4,9 @@ import com.murphy.gee.sys.entity.AuthorityAction;
 import com.murphy.gee.sys.entity.AuthorityActionExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository("authorityActionMapper")
 public interface AuthorityActionMapper {
     long countByExample(AuthorityActionExample example);
 

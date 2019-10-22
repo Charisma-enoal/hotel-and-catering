@@ -98,9 +98,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.murphy.gee.sys.entity.AuthorityModules">
-    insert into sys_mapping_authority_modules (mapping_id, modules_id, auth_id
+    insert into sys_mapping_authority_modules (modules_id, auth_id
       )
-    values (#{mappingId,jdbcType=BIGINT}, #{modulesId,jdbcType=BIGINT}, #{authId,jdbcType=BIGINT}
+    values (#{modulesId,jdbcType=BIGINT}, #{authId,jdbcType=BIGINT}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.murphy.gee.sys.entity.AuthorityModules">

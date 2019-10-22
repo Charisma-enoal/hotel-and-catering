@@ -38,4 +38,5 @@ public interface AuthorityMapper {
      * @date: 2019-08-07 17:47
      */
     List<Authority> selectAuthByUsername(String userName);
+
 }

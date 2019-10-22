@@ -1,15 +1,14 @@
 package com.murphy.gee.sys.controller;
 
 import com.murphy.gee.common.entity.JsonResult;
+import com.murphy.gee.common.exception.MurphyException;
+import com.murphy.gee.sys.entity.Menu;
 import com.murphy.gee.sys.entity.Modules;
 import com.murphy.gee.sys.service.IMenuService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -33,5 +32,26 @@ public class MenuController {
     @ResponseBody
     public JsonResult<List<Modules>> list(Principal principal){
         return new JsonResult<List<Modules>>().success(menuService.findMenuByUserName(principal.getName()));
+    }
+
+    @ApiOperation("保存菜单")
+    @PostMapping("/save")
+    public JsonResult save(Menu menu,Principal principal) throws MurphyException {
+        menu.setCreatePerson(principal.getName());
+        menu.setLastEditPerson(principal.getName());
+        menuService.save(menu);
+        return new JsonResult().success();
+    }
+
+    @ApiOperation("查看菜单")
+    @GetMapping("/view")
+    public JsonResult<Menu> view(@RequestParam("menuId") Long menuId){
+        return new JsonResult<Menu>(menuService.view(menuId));
+    }
+    @ApiOperation("删除菜单")
+    @PostMapping("/delete")
+    public JsonResult delete(@RequestParam("menuId") Long menuId) throws MurphyException{
+        menuService.delete(menuId);
+        return new JsonResult().success();
     }
 }

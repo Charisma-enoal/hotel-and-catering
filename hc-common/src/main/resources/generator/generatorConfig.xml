@@ -18,7 +18,7 @@
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
         <!-- 生成模型的包名和位置-->
-        <javaModelGenerator targetPackage="com.murphy.gee.common.entity" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.murphy.gee.sys.entity" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
@@ -27,10 +27,25 @@
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
         <!-- 生成DAO的包名和位置-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.murphy.gee.common.mapper" targetProject="src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.murphy.gee.sys.mapper" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名-->
-        <table tableName="sys_user" domainObjectName = "User" schema=""></table>
+        <!--<table tableName="sys_user" domainObjectName = "User" schema=""></table>-->
+        <!--<table tableName="sys_modules" domainObjectName = "Modules" schema=""></table>-->
+        <!--<table tableName="sys_mapping_authority_modules" domainObjectName = "AuthorityModules" schema=""></table>-->
+        <!--<table tableName="sys_menu" domainObjectName = "Menu" schema=""></table>-->
+        <!--<table tableName="sys_mapping_authority_menu" domainObjectName = "AuthorityMenu" schema=""></table>-->
+        <!--<table tableName="sys_action" domainObjectName = "Action" schema=""></table>-->
+        <!--<table tableName="sys_mapping_authority_action" domainObjectName = "AuthorityAction" schema=""></table>-->
+        <table tableName="sys_authority" domainObjectName = "Authority" schema=""></table>
+        <!--<table tableName="sys_mapping_role_authority" domainObjectName = "RoleAuthority" schema=""></table>-->
+        <!--<table tableName="sys_role" domainObjectName = "Role" schema=""></table>-->
+        <!--<table tableName="sys_mapping_user_role" domainObjectName = "UserRole" schema=""></table>-->
+        <!--<table tableName="sys_user" domainObjectName = "Authority" schema=""></table>-->
+        <!--<table tableName="sys_mapping_group_role" domainObjectName = "GroupRole" schema=""></table>-->
+        <!--<table tableName="sys_user_group" domainObjectName = "Group" schema=""></table>-->
+        <!--<table tableName="sys_mapping_group_user" domainObjectName = "UserGroup" schema=""></table>-->
+
     </context>
 </generatorConfiguration>

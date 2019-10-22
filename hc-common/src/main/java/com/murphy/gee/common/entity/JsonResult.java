@@ -103,7 +103,7 @@ public class JsonResult<T> {
     }
 
     public static JsonResult success(){
-        return new JsonResult().setMsg("操作成功");
+        return new JsonResult().setMsg("操作成功").setCode(200);
     }
     /*
      * @description: 失败时调用
