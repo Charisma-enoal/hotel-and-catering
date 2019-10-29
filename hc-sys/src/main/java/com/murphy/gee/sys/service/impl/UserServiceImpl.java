@@ -9,6 +9,7 @@ import com.murphy.gee.sys.mapper.UserMapper;
 import com.murphy.gee.sys.mapper.UserRoleMapper;
 import com.murphy.gee.sys.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -32,7 +33,8 @@ import java.util.List;
 @Service("userService")
 public class UserServiceImpl implements IUserService {
 
-    private final String DEFAULT_PASSWORD = "666666";
+    @Value("${defaultPassword}")
+    private String DEFAULT_PASSWORD;
 
     @Autowired
     private UserMapper userMapper;
